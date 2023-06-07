@@ -4,12 +4,14 @@ class ViewController: UIViewController {
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var resultView: UITextView!
     private lazy var module: TorchModule = {
-        if let filePath = Bundle.main.path(forResource: "model", ofType: "pt"),
-            let module = TorchModule(fileAtPath: filePath) {
-            return module
-        } else {
-            fatalError("Can't find the model file!")
-        }
+        if let module = TorchModule(fileAtPath: "/Users/amielvincent/ios-demo-app/HelloWorld/HelloWorld/HelloWorld/model/model.pt")
+            {
+                return module
+            }
+            else
+            {
+                fatalError("Can't find the model file!")
+            }
     }()
 
     private lazy var labels: [String] = {
@@ -23,7 +25,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let image = UIImage(named: "image.png")!
+        let image = UIImage(named: "image.jpg")!
         imageView.image = image
         let resizedImage = image.resized(to: CGSize(width: 224, height: 224))
         guard var pixelBuffer = resizedImage.normalized() else {

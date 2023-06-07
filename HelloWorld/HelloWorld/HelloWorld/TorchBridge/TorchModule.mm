@@ -10,6 +10,7 @@
   self = [super init];
   if (self) {
     try {
+        std::cout << filePath;
       _impl = torch::jit::_load_for_mobile(filePath.UTF8String);
     } catch (const std::exception& exception) {
       NSLog(@"%s", exception.what());
